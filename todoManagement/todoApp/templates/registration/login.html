@@ -1,0 +1,40 @@
+{% load static %}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login | Task Collector</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css' %}">
+</head>
+<body class="bg-light">
+  <div class="container d-flex justify-content-center align-items-center" style="min-height:100vh">
+    <div class="card p-4 shadow-sm" style="max-width: 400px; width:100%;">
+      <h2 class="card-title text-center mb-4">Log In</h2>
+      <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="id_username" class="form-label">Username</label>
+          {{ form.username|add_class:"form-control" }}
+        </div>
+        <div class="mb-3">
+          <label for="id_password" class="form-label">Password</label>
+          {{ form.password|add_class:"form-control" }}
+        </div>
+        {% if form.non_field_errors %}
+          <div class="alert alert-danger">
+            {{ form.non_field_errors }}
+          </div>
+        {% endif %}
+        <button type="submit" class="btn btn-primary w-100">Log In</button>
+      </form>
+      <p class="text-center mt-3">
+        <a href="{% url 'password_reset' %}">Forgot password?</a>
+      </p>
+    </div>
+  </div>
+
+  <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>
